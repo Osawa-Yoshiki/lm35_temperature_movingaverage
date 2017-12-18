@@ -1,4 +1,10 @@
-#define PIN1 1;
+#define PIN1 A0
+#define MEAN 100
+
+//移動平均用
+int cnt = 0;
+float temp[MEAN+1] = {};
+boolean calibration_done = false;
 
 //温度の取得
 float get_temp() {
@@ -9,7 +15,7 @@ float get_temp() {
 
 void setup () {
   Serial.begin(9600);                       //ボーレート9600でシリアル通信開始
-  Serial.println(“hello, Arduino!”);      //シリアルポートにメッセージ出力
+  Serial.println("hello, Arduino!");      //シリアルポートにメッセージ出力
 }
 
 void loop () {
@@ -31,12 +37,12 @@ void loop () {
 
   if (calibration_done == true) {                           //最初の取得が終わっていればクラウド送信（未実装）
         if (cnt % 10 == 0) {                                //出力を10回に1回に制限
-            Serial.print(“Degree(C):   ”);               //温度をシリアルに出力（表示用）
+            Serial.print("Degree(C):   ");               //温度をシリアルに出力（表示用）
             Serial.println(celsius);                       //温度をシリアルに出力
               //requestURI(celsius);                         //温度をクラウドに送信（未実装）
     }
     } else {
-        Serial.println(“calibrating... Please Wait”);    //最初の取得中は表示も送信もしない
+        Serial.println("calibrating... Please Wait");    //最初の取得中は表示も送信もしない
     }
   delay(100);
 }
