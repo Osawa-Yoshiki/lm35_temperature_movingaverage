@@ -1,4 +1,4 @@
-#define PIN1 A0
+#define TEMP_PIN A0
 #define MEAN 100
 
 //移動平均用
@@ -8,7 +8,7 @@ boolean calibration_done = false;
 
 //温度の取得
 float get_temp() {
-    int analogValue = analogRead(PIN1);
+    int analogValue = analogRead(TEMP_PIN);
     float temp = ((analogValue * 5) / 1024.0) * 100;
     return temp;
 }
